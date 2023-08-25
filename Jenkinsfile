@@ -8,7 +8,9 @@ pipeline{
         }
         stage('Data Drift Test'){
             agent {
-                docker { image 'data-analysis' }
+                docker { image 'data-analysis' 
+                         -v '/scikit_learn_data:scikit_learn_data'
+                }
             }
             steps{
                  sh 'python3 data-drift-test.py'
