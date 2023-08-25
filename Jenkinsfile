@@ -9,7 +9,7 @@ pipeline{
         stage('Data Drift Test'){
             agent {
                 docker { image 'data-analysis' 
-                         args '-v scikit_learn_data:scikit_learn_data'
+                         
                 }
             }
             steps{
