@@ -56,3 +56,107 @@ def create_test_suite(i: int):
 
     data_drift_test_suite.run(reference_data=adult_ref, current_data=adult_cur.iloc[100 * i : 100 * (i + 1), :])
     return data_drift_test_suite
+
+def create_project(workspace: WorkspaceBase):
+    project = workspace.create_project(YOUR_PROJECT_NAME)
+    project.description = YOUR_PROJECT_DESCRIPTION
+    project.dashboard.add_panel(
+        DashboardPanelCounter(
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            agg=CounterAgg.NONE,
+            title="Census Income Dataset (Adult)",
+        )
+    )
+    project.dashboard.add_panel(
+        DashboardPanelCounter(
+            title="Model Calls",
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            value=PanelValue(
+                metric_id="DatasetMissingValuesMetric",
+                field_path=DatasetMissingValuesMetric.fields.current.number_of_rows,
+                legend="count",
+            ),
+            text="count",
+            agg=CounterAgg.SUM,
+            size=1,
+        )
+    )
+    project.dashboard.add_panel(
+        DashboardPanelCounter(
+            title="Share of Drifted Features",
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            value=PanelValue(
+                metric_id="DatasetDriftMetric",
+                field_path="share_of_drifted_columns",
+                legend="share",
+            ),
+            text="share",
+            agg=CounterAgg.LAST,
+            size=1,
+        )
+    )
+    project.dashboard.add_panel(
+        DashboardPanelPlot(
+            title="Dataset Quality",
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            values=[
+                PanelValue(metric_id="DatasetDriftMetric", field_path="share_of_drifted_columns", legend="Drift Share"),
+                PanelValue(
+                    metric_id="DatasetMissingValuesMetric",
+                    field_path=DatasetMissingValuesMetric.fields.current.share_of_missing_values,
+                    legend="Missing Values Share",
+                ),
+            ],
+            plot_type=PlotType.LINE,
+        )
+    )
+    project.dashboard.add_panel(
+        DashboardPanelPlot(
+            title="Age: Wasserstein drift distance",
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            values=[
+                PanelValue(
+                    metric_id="ColumnDriftMetric",
+                    metric_args={"column_name.name": "age"},
+                    field_path=ColumnDriftMetric.fields.drift_score,
+                    legend="Drift Score",
+                ),
+            ],
+            plot_type=PlotType.BAR,
+            size=1,
+        )
+    )
+    project.dashboard.add_panel(
+        DashboardPanelPlot(
+            title="Education-num: Wasserstein drift distance",
+            filter=ReportFilter(metadata_values={}, tag_values=[]),
+            values=[
+                PanelValue(
+                    metric_id="ColumnDriftMetric",
+                    metric_args={"column_name.name": "education-num"},
+                    field_path=ColumnDriftMetric.fields.drift_score,
+                    legend="Drift Score",
+                ),
+            ],
+            plot_type=PlotType.BAR,
+            size=1,
+        )
+    )
+    project.save()
+    return project
+
+
+def create_demo_project(workspace: str):
+    ws = Workspace.create(workspace)
+    project = create_project(ws)
+
+    for i in range(0, 5):
+        report = create_report(i=i)
+        ws.add_report(project.id, report)
+
+        test_suite = create_test_suite(i=i)
+        ws.add_test_suite(project.id, test_suite)
+
+
+if __name__ == "__main__":
+    create_demo_project(WORKSPACE)
