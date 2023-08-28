@@ -4,7 +4,8 @@ from sklearn import datasets
 
 from evidently.metrics import ColumnDriftMetric
 from evidently.metrics import ColumnSummaryMetric
-from evidently.metrics import DatasetDriftMetric , DataDriftPreset , TargetDriftPreset
+from evidently.metrics import DatasetDriftMetric
+from evidently.metric_preset import DataDriftPreset, TargetDriftPreset, DataQualityPreset, RegressionPreset
 from evidently.metrics import DatasetMissingValuesMetric
 from evidently.report import Report
 from evidently.test_preset import DataDriftTestPreset
