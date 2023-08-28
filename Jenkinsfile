@@ -14,7 +14,8 @@ pipeline{
             }
             steps{
                  sh 'df -h'
-                 sh 'python3 data-drift-test.py'
+                //  sh 'python3 data-drift-test.py'
+                sh 'python3 how_to_use_snapshots.py'
             }
         } 
     }
