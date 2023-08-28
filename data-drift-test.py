@@ -34,19 +34,19 @@ YOUR_PROJECT_DESCRIPTION = "Test project using Adult dataset."
 
 def create_report(i: int):
     
-    # data_drift_report = Report(
-    #     metrics=[
-    #         DatasetDriftMetric(),
-    #         DatasetMissingValuesMetric(),
-    #         ColumnDriftMetric(column_name="age", stattest="wasserstein"),
-    #         ColumnSummaryMetric(column_name="age"),
-    #         ColumnDriftMetric(column_name="education-num", stattest="wasserstein"),
-    #         ColumnSummaryMetric(column_name="education-num"),
-    #     ],
-    #     timestamp=datetime.datetime.now() + datetime.timedelta(days=i),
-    # )
+    data_drift_report = Report(
+        metrics=[
+            DatasetDriftMetric(),
+            DatasetMissingValuesMetric(),
+            ColumnDriftMetric(column_name="age", stattest="wasserstein"),
+            ColumnSummaryMetric(column_name="age"),
+            ColumnDriftMetric(column_name="education-num", stattest="wasserstein"),
+            ColumnSummaryMetric(column_name="education-num"),
+        ],
+        timestamp=datetime.datetime.now() + datetime.timedelta(days=i),
+    )
 
-    data_drift_report = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
+    # data_drift_report = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
  
     data_drift_report.run(reference_data=adult_ref, current_data=adult_cur.iloc[100 * i : 100 * (i + 1), :])
     return data_drift_report
