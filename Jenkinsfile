@@ -9,7 +9,8 @@ pipeline{
         stage('Data Drift Analysis'){
             agent {
                 docker { image 'data-analysis' 
-                         args '-v /mnt/c/Shoaib/learning/repo/evidently/scikit_learn_data:/scikit_learn_data , /mnt/c/Shoaib/learning/repo/evidently/workspace:/workspace'
+                         args '-v /mnt/c/Shoaib/learning/repo/evidently/scikit_learn_data:/scikit_learn_data'
+                         args '-v /mnt/c/Shoaib/learning/repo/evidently/workspace:/workspace'
                 }
             }
             steps{
