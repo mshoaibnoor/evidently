@@ -153,7 +153,9 @@ def create_demo_project(workspace: str):
 
     for i in range(0, 5):
         report = create_report(i=i)
+        # report.save_html()
         ws.add_report(project.id, report)
+        
 
         test_suite = create_test_suite(i=i)
         ws.add_test_suite(project.id, test_suite)
