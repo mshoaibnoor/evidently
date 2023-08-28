@@ -28,7 +28,7 @@ adult_cur = adult[adult.education.isin(["Some-college", "HS-grad", "Bachelors"])
 
 WORKSPACE = "workspace"
 
-YOUR_PROJECT_NAME = "Adult Education"
+YOUR_PROJECT_NAME = "Adult Education jenkins"
 YOUR_PROJECT_DESCRIPTION = "Test project using Adult dataset."
 
 
