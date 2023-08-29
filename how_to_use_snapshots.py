@@ -1,3 +1,6 @@
+# Metrics report 
+# https://github.com/evidentlyai/evidently/blob/main/examples/sample_notebooks/evidently_metric_presets.ipynb
+
 import pandas as pd
 import numpy as np
 
@@ -50,15 +53,6 @@ target_drift_report.save_html('/scikit_learn_data/workspace/target_drift_report.
 
 # target drift report
 
-# regression performance report
-regression_performance_report = Report(
-    metrics=[
-        RegressionPreset()
-    ]
-)
-regression_performance_report.run(reference_data=bcancer_ref, current_data=bcancer_cur)
-regression_performance_report.save_html('/scikit_learn_data/workspace/regresion_performance_report.html')
-# regression performance report
 
 # classification performance report
 classification_performance_report = Report(
