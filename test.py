@@ -21,7 +21,7 @@ from evidently.ui.remote import RemoteWorkspace
 from evidently.ui.workspace import Workspace
 from evidently.ui.workspace import WorkspaceBase
 
-adult = pd.read_csv('app/data/adult-education-dataset.csv')
+adult = pd.read_csv('/app/data/adult-education-dataset.csv')
 
 adult_ref = adult[~adult.education.isin(["Some-college", "HS-grad", "Bachelors"])]
 adult_cur = adult[adult.education.isin(["Some-college", "HS-grad", "Bachelors"])]
