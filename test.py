@@ -27,6 +27,16 @@ adult_ref = adult[~adult.education.isin(["Some-college", "HS-grad", "Bachelors"]
 adult_cur = adult[adult.education.isin(["Some-college", "HS-grad", "Bachelors"])]
 
 
+data_quality_report = Report(
+    metrics=[
+        DataQualityPreset()
+    ]
+)
+data_quality_report.run(reference_data=adult_ref, current_data=adult_cur)
+data_quality_report.save_html('/app/workspace/data_quality_report.html')
+
+
+
 WORKSPACE = "workspace"
 
 YOUR_PROJECT_NAME = "Adult Education jenkins"
