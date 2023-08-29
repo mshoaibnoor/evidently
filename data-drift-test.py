@@ -11,7 +11,7 @@ from evidently.metrics import DatasetDriftMetric
 from evidently.metric_preset import DataDriftPreset, TargetDriftPreset, DataQualityPreset, RegressionPreset
 from evidently.metrics import DatasetMissingValuesMetric
 from evidently.report import Report
-from evidently.test_preset import DataDriftTestPreset
+from evidently.test_preset import DataDriftTestPreset, DataQualityTestPreset
 from evidently.test_suite import TestSuite
 from evidently.ui.dashboards import CounterAgg
 from evidently.ui.dashboards import DashboardPanelCounter
@@ -42,6 +42,7 @@ def create_report(i: int):
     data_drift_report = Report(
         metrics=[
             DatasetDriftMetric(),
+            DataQualityPreset(),
             DatasetMissingValuesMetric(),
             ColumnDriftMetric(column_name="age", stattest="wasserstein"),
             ColumnSummaryMetric(column_name="age"),
@@ -59,7 +60,9 @@ def create_report(i: int):
 
 def create_test_suite(i: int):
     data_drift_test_suite = TestSuite(
-        tests=[DataDriftTestPreset()],
+        tests=[DataDriftTestPreset(),
+               DataQualityTestPreset()
+               ],
         timestamp=datetime.datetime.now() + datetime.timedelta(days=i),
     )
 
