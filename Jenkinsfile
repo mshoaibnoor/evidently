@@ -9,12 +9,12 @@ pipeline{
         stage('Data Drift Test'){
             agent {
                 docker { image 'data-analysis' 
-                         args '-v /mnt/c/Shoaib/learning/repo/evidently/app:/scikit_learn_data'
+                         args '-v /mnt/c/Shoaib/learning/repo/evidently/app:/app'
                 }
             }
             steps{
                  sh 'df -h'
-                 sh 'python3 data-drift-test.py'
+                 sh 'python3 test.py'
                 // sh 'python3 metrics-presets-report.py'
             }
         } 

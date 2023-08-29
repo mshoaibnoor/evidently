@@ -5,10 +5,7 @@ RUN pip install scikit-learn datetime evidently
 
 RUN mkdir /app
 WORKDIR /app
-RUN df -h
 
-RUN mkdir -p /scikit_learn_data/openml
-RUN chmod 775 /scikit_learn_data/openml -R 
 
 
 
