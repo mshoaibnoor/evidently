@@ -54,13 +54,3 @@ target_drift_report.save_html('/scikit_learn_data/workspace/target_drift_report.
 # target drift report
 
 
-# classification performance report
-classification_performance_report = Report(
-    metrics=[
-        ClassificationPreset(probas_threshold=0.7)
-    ]
-)
-
-classification_performance_report.run(reference_data=bcancer_ref, current_data=bcancer_cur)
-classification_performance_report.save_html('/scikit_learn_data/workspace/classification_performance_report.html')
-# classification performance report
