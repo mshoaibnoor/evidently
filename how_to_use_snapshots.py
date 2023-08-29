@@ -4,7 +4,7 @@ import numpy as np
 from sklearn import datasets
 
 from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset
+from evidently.metric_preset import DataDriftPreset,DataQualityPreset,TargetDriftPreset
 
 
 bcancer_data = datasets.load_breast_cancer(as_frame=True)
@@ -15,7 +15,10 @@ bcancer_cur = bcancer.sample(n=200, replace=False)
 
 
 data_drift_report = Report(
-    metrics=[DataDriftPreset()]
+    metrics=[DataDriftPreset(),
+             DataQualityPreset(),
+             TargetDriftPreset()
+             ]
 )
 
 data_drift_report.run(reference_data=bcancer_ref, current_data=bcancer_cur)
