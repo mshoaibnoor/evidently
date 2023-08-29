@@ -1,6 +1,9 @@
 import datetime
 
 from sklearn import datasets
+import pandas as pd
+import os
+
 
 from evidently.metrics import ColumnDriftMetric
 from evidently.metrics import ColumnSummaryMetric
@@ -20,8 +23,10 @@ from evidently.ui.remote import RemoteWorkspace
 from evidently.ui.workspace import Workspace
 from evidently.ui.workspace import WorkspaceBase
 
-adult_data = datasets.fetch_openml(name="adult", version=2, as_frame="auto")
-adult = adult_data.frame
+# adult_data = datasets.fetch_openml(name="adult", version=2, as_frame="auto")
+# adult = adult_data.frame
+
+adult = pd.read_csv('/app/data/adult-education-dataset.csv')
 
 adult_ref = adult[~adult.education.isin(["Some-college", "HS-grad", "Bachelors"])]
 adult_cur = adult[adult.education.isin(["Some-college", "HS-grad", "Bachelors"])]
@@ -163,4 +168,9 @@ def create_demo_project(workspace: str):
 
 
 if __name__ == "__main__":
+    cwd = os.getcwd()
+    print(cwd)
+    os.chdir('/app/')
+    cwd = os.getcwd()
+    print(cwd)
     create_demo_project(WORKSPACE)
