@@ -1,4 +1,4 @@
-# Metrics report 
+# Metrics Presets report 
 # https://github.com/evidentlyai/evidently/blob/main/examples/sample_notebooks/evidently_metric_presets.ipynb
 
 import pandas as pd
