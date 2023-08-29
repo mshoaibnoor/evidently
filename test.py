@@ -2,6 +2,7 @@ import datetime
 
 from sklearn import datasets
 import pandas as pd
+import os
 
 from evidently.metrics import ColumnDriftMetric
 from evidently.metrics import ColumnSummaryMetric
@@ -138,4 +139,9 @@ def create_demo_project(workspace: str):
     
 
 if __name__ == "__main__":
+    cwd = os.getcwd()
+    print(cwd)
+    os.chdir('/app/')
+    cwd = os.getcwd()
+    print(cwd)
     create_demo_project(WORKSPACE)

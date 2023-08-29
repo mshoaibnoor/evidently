@@ -1,5 +1,5 @@
 workspace/*
 mlruns/*
-app/data/*
+app/*
 scikit_learn_data/*
 workspace/*
