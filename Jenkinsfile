@@ -14,8 +14,8 @@ pipeline{
             }
             steps{
                  sh 'df -h'
-                //  sh 'python3 data-drift-test.py'
-                sh 'python3 metrics-presets-report.py'
+                 sh 'python3 data-drift-test.py'
+                // sh 'python3 metrics-presets-report.py'
             }
         } 
     }
