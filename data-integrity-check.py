@@ -16,4 +16,5 @@ if __name__ == "__main__":
     os.chdir('/dataintegritycheck/')
     cwd = os.getcwd()
     print(cwd)
+    os.environ['MPLCONFIGDIR']='/dataintegritycheck/'
     data_integrity_check()
