@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Data Integrity Check'){
             agent{
-                docker{ image 'data-integrity-check'
+                docker{ image 'shoaibnoor/data-integrity-check:latest'
                         args '-v /mnt/c/Shoaib/learning/repo/evidently/dataintegritycheck:/dataintegritycheck'
                 }
             }
