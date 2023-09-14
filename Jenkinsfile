@@ -6,6 +6,18 @@ pipeline{
                 checkout scm
             }
         }
+        stage('Data Integrity Check'){
+            agent{
+                docker{ image 'data-integrity-check'
+                        args '-v /mnt/c/Shoaib/learning/repo/evidently/dataintegritycheck:/dataintegritycheck'
+                }
+            }
+            steps{
+                sh 'df -h'
+                sh 'pwd'
+                sh 'python3 data-integrity-check.py'
+            }
+        }
         stage('Data Drift Test'){
             agent {
                 docker { image 'data-analysis' 
