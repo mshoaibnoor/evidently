@@ -1,7 +1,7 @@
 #pandas 2.0.1 is required to run deepchecks successfully
 from deepchecks.tabular.suites import data_integrity
 from deepchecks.tabular import Dataset
-from deepchecks.tabular.checks import ClassImbalance
+from deepchecks.tabular.checks import ClassImbalance, OutlierSampleDetection
 import pandas as pd
 import os
 from datetime import datetime
@@ -26,6 +26,17 @@ def class_imbalance():
     file_name = '/app/output/dataintegritycheck/class-imbalance-' + dt + '.html'
     ci.save_as_html(file_name)
 
+def outlier_detection():
+    data_df = pd.read_csv('app/data/adult-education-dataset.csv')
+    dataset = Dataset(data_df, label='class', cat_features=[])
+    check = OutlierSampleDetection(nearest_neighbors_percent=0.01, extent_parameter=3)
+    od = check.run(dataset)
+    dt = datetime.now()
+    dt = str(dt)
+    dt = dt.replace(' ','-')
+    file_name = 'app/output/dataintegritycheck/outlier-detection-' + dt + '.html'
+    od.save_as_html(file_name)
+
 
 if __name__ == "__main__":
     cwd = os.getcwd()
@@ -35,3 +46,4 @@ if __name__ == "__main__":
     print(cwd)
     data_integrity_check()
     class_imbalance()
+    outlier_detection()
