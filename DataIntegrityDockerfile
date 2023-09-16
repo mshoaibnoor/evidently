@@ -1,14 +1,14 @@
 # docker build . -f DataIntegrityDockerfile --tag data-integrity-check
 # docker tag data-integrity-check:latest shoaibnoor/data-integrity-check:latest
 # docker push shoaibnoor/data-integrity-check:latest
-
+# deepchecks work with pandas==2.0.1
 
 FROM python:3.10-slim
 
 RUN apt-get update && apt-get install -y curl
 RUN pip install pandas==2.0.1 deepchecks --upgrade
 
-RUN mkdir /dataintegritycheck
-COPY data-integrity-check.py /dataintegritycheck/data-integrity-check.py 
-WORKDIR /dataintegritycheck
+RUN mkdir /app
+COPY data-integrity-check.py /app/data-integrity-check.py 
+WORKDIR /app
 CMD ["python3", "data-integrity-check.py"]
