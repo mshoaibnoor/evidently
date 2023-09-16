@@ -11,4 +11,4 @@ RUN pip install pandas==2.0.1 deepchecks --upgrade
 RUN mkdir /app
 COPY data-integrity-check.py /app/data-integrity-check.py 
 WORKDIR /app
-CMD ["python3", "data-integrity-check.py"]
+# CMD ["python3", "data-integrity-check.py"]
