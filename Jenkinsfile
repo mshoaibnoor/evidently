@@ -6,7 +6,7 @@ pipeline{
                 checkout scm
             }
         }
-        stage('Data Integrity Check'){
+        stage('Data Quality Checks'){
             agent{
                 docker{ image 'shoaibnoor/data-integrity-check:latest'
                         args '-v /mnt/c/Shoaib/learning/repo/evidently/app:/app'
