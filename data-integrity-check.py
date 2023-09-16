@@ -27,14 +27,14 @@ def class_imbalance():
     ci.save_as_html(file_name)
 
 def outlier_detection():
-    data_df = pd.read_csv('app/data/adult-education-dataset.csv')
+    data_df = pd.read_csv('/app/data/adult-education-dataset.csv')
     dataset = Dataset(data_df, label='class', cat_features=[])
     check = OutlierSampleDetection(nearest_neighbors_percent=0.01, extent_parameter=3)
     od = check.run(dataset)
     dt = datetime.now()
     dt = str(dt)
     dt = dt.replace(' ','-')
-    file_name = 'app/output/dataintegritycheck/outlier-detection-' + dt + '.html'
+    file_name = '/app/output/dataintegritycheck/outlier-detection-' + dt + '.html'
     od.save_as_html(file_name)
 
 
