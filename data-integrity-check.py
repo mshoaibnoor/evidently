@@ -10,16 +10,20 @@ def data_integrity_check():
     data_df = pd.read_csv('/app/data/adult-education-dataset.csv')
     dataset = Dataset(data_df, label='class', cat_features=[])
     suite_result = data_integrity().run(dataset)
-    suite_result.save_as_html('/app/output/dataintegritycheck/data_validation.html')
+    dt = datetime.now()
+    dt = str(dt)
+    dt = dt.replace(' ','-')
+    file_name = '/app/output/dataintegritycheck/data_integrity-' + dt + '.html'
+    suite_result.save_as_html(file_name)
 
 def class_imbalance():
-    data_df = pd.read_csv('app/data/adult-education-dataset.csv')
+    data_df = pd.read_csv('/app/data/adult-education-dataset.csv')
     dataset = Dataset(data_df, label='class', cat_features=[])
     ci = ClassImbalance().add_condition_class_ratio_less_than(0.10).run(dataset)
     dt = datetime.now()
     dt = str(dt)
     dt = dt.replace(' ','-')
-    file_name = 'app/output/dataintegritycheck/class-imbalance-' + dt + '.html'
+    file_name = '/app/output/dataintegritycheck/class-imbalance-' + dt + '.html'
     ci.save_as_html(file_name)
 
 
